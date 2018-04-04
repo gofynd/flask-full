@@ -1,0 +1,15 @@
+*.pyc
+.idea/
+.gitignore~
+celerybeat-schedule.db
+*.retry
+dump.rdb
+nano.save
+config/db.sqlite
+.coverage
+.ropeproject/
+log/
+.cache/
+venv*
+temp/*
+!temp/.gitkeep

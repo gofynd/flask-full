@@ -1,0 +1,17 @@
+Flask==0.12.1
+blinker==1.4
+celery==4.1.0
+redis==2.10.5
+Flask-Cache==0.13.1
+Flask-Mail==0.9.1
+Flask-Cors==3.0.2
+Flask-SocketIO==2.8.6
+mongoengine==0.13.0
+slackclient==1.0.5
+marshmallow==2.13.5
+eventlet==0.21.0
+agate==1.6.0
+ujson==1.35
+gunicorn==19.7.1
+boto3==1.4.4
+Sphinx==1.6.2
