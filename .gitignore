@@ -13,3 +13,4 @@ log/
 venv*
 temp/*
 !temp/.gitkeep
+.pytest_cache
