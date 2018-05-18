@@ -1,0 +1,67 @@
+version: '2'
+
+services:
+  # app server
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    hostname: app
+    image: flask-full
+    volumes:
+      - .:/srv/flask-full
+    command: ./docker/app/run_app.sh
+    ports:
+      - "8080:8080"
+    links:
+      - redis
+      - mongo
+    depends_on:
+      - redis
+      - mongo
+    environment:
+      redis_host: "redis"
+      mongo_host: "mongo"
+
+  # Celery beat
+  beat:
+    image: flask-full
+    volumes:
+      - .:/srv/flask-full
+    command: ./docker/beat/run_beat.sh
+    links:
+      - redis
+      - mongo
+    depends_on:
+      - mongo
+      - redis
+    environment:
+      redis_host: "redis"
+      mongo_host: "mongo"
+
+  # Celery worker
+  worker:
+    image: flask-full
+    volumes:
+      - .:/srv/flask-full
+    command: ./docker/worker/run_worker.sh
+    links:
+      - redis
+      - mongo
+    depends_on:
+      - redis
+      - mongo
+    environment:
+      redis_host: "redis"
+      mongo_host: "mongo"
+
+  # Redis
+  redis:
+    image: redis:4.0.9
+    hostname: redis
+
+  mongo:
+    image: mongo:3.6.4
+    hostname: mongo
+    ports:
+      - "27018:27017"

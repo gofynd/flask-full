@@ -12,8 +12,6 @@ from flask import jsonify
 from flask import request
 from flask.views import MethodView
 from flask_mail import Message
-
-from app.decorators import get_request
 from app.decorators.auth import check_authentication
 from . import stats, config_name
 from app import current_config
