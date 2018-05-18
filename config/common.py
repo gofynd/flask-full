@@ -1,11 +1,17 @@
 import os
 import logging
 from pymongo import ReadPreference
+from app import app_name, redis_host, mongo_host
+import redbeat
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config(object):
+
+    REDIS_DOMAIN = 'redis://{}:6379'.format(redis_host)
+    AUTH_REDIS_URL = 'redis://{}:6379/0'.format(redis_host)
+
     DEBUG = False
     TESTING = False
     IS_AUTH_ENABLED = True
@@ -19,11 +25,8 @@ class Config(object):
                                 '51f52814-0071-11e6-a247-000ec6c2372c')
     REQUEST_STATS_WINDOW = 15
 
-    REDIS_DOMAIN = 'redis://localhost:6379'
-
-    AUTH_REDIS_URL = 'redis://localhost:6379/0'
-
     CELERY_BROKER_URL = '{}/{}'.format(REDIS_DOMAIN, 1)
+
     CELERY_RESULT_BACKEND = '{}/{}'.format(REDIS_DOMAIN, 1)
 
     CELERY_WORKER_CONFIG = {
@@ -33,11 +36,17 @@ class Config(object):
         'worker_max_tasks_per_child': 50
     }
 
+
+    REDBEAT_REDIS_URL = '{}/{}'.format(REDIS_DOMAIN, 3)
+    REDBEAT_KEY_PREFIX = 'redbeat'
+    REDBEAT_LOCK_KEY = 'redbeat:lock'
+    # REDBEAT_LOCK_TIMEOUT = 2
+
     CELERY_BEAT_CONFIG = {
         'broker': CELERY_BROKER_URL,
         'loglevel': LOG_LEVEL,
         'traceback': True,
-        'schedule': 'celerybeat-schedule.db'
+        'scheduler_cls': redbeat.RedBeatScheduler,
     }
 
     CELERY_DEFAULT_QUEUE = 'default'
@@ -80,8 +89,8 @@ class Config(object):
             "username": "user",
             "password": "password",
             "port": 27017,
-            "host": "mongodb://user:password@127.0.0.1/app?authSource=admin",
-            "db": "dbname",
+            "host": "mongodb://user:password@{}/{}?authSource=admin".format(mongo_host, app_name),
+            "db": "{}".format(app_name),
             "read_preference": ReadPreference.PRIMARY,
         }
     }
@@ -100,7 +109,7 @@ class Config(object):
         "content_alert": "test_channel"
     }
 
-    LOG_FILE_LOCATION = '/var/log/app/app.log'
+    LOG_FILE_LOCATION = '/var/log/{}/{}.log'.format(app_name, app_name)
 
     CACHE_CONFIG = {
         'CACHE_TYPE': 'redis',

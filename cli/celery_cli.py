@@ -1,10 +1,14 @@
 import logging
 
 import click
+import sys
 from celery.bin import worker
 from celery import current_app as current_celery_app
 from copy import deepcopy
-from app import config_name, current_config
+
+from celery.signals import after_setup_task_logger, after_setup_logger
+
+from app import config_name, current_config, log_formatter
 from manage import cli
 
 logger = logging.getLogger(__name__)
@@ -36,3 +40,22 @@ def celery(queues, logfile, concurrency, worker_max_tasks_per_child):
     w = worker.worker(app=application)
     logger.info("celery environment : {}".format(config_name))
     w.run(**config)
+
+
+def create_celery_logger_handler(logger, propagate):
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setFormatter(log_formatter)
+    logger.addHandler(console_handler)
+    logger.logLevel = current_config.LOG_LEVEL
+    logger.propagate = propagate
+
+
+@after_setup_task_logger.connect
+def after_setup_celery_task_logger(logger, **kwargs):
+    """ This function sets the 'celery.task' logger handler and formatter """
+    create_celery_logger_handler(logger, True)
+
+@after_setup_logger.connect
+def after_setup_celery_logger(logger, **kwargs):
+    """ This function sets the 'celery' logger handler and formatter """
+    create_celery_logger_handler(logger, False)

@@ -1,7 +1,5 @@
 import os
-
-from pymongo import ReadPreference
-
+from app import app_name
 from .common import Config
 
 
@@ -11,4 +9,4 @@ class TestingConfig(Config):
 
     MEDIA_DIR = 'media'
     FILES_DIR = '{}/{}'.format(MEDIA_DIR, 'files')
-    LOG_FILE_LOCATION = '{}/{}'.format(os.getcwd(), 'temp/app.log')
+    LOG_FILE_LOCATION = '{}/{}'.format(os.getcwd(), 'temp/{}.log'.format(app_name))
