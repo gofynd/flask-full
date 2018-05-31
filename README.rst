@@ -1,10 +1,7 @@
-
-.. image:: https://img.shields.io/travis/USER/REPO.svg   :alt: Travis
-
-
 Flask-Full
 **********
-.. image:: https://img.shields.io/travis/USER/REPO.svg   :alt: Travis
+.. image:: https://img.shields.io/travis/USER/REPO.svg
+    :alt: Travis
 
 Flask-Full is a boilerplate framework on top of flask for developing large api backend applications using flask. It has in built support for creating shell commands, celery, websocket, eventlet, mongoengine orm and rst docs.
 
