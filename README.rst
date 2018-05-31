@@ -4,7 +4,7 @@ Flask-Full is a boilerplate framework on top of flask for developing large api b
 
 Usage
 -----
-Flask-Full requres  minimum **python 3.5**.
+Flask-Full requires  minimum **python 3.5**.
 
 Pre-required Setup:
 
@@ -48,6 +48,8 @@ For available commands and options hit
 
     python manage.py
 
+
+
 Structure
 ---------
 .. code:: shell
@@ -56,22 +58,22 @@ Structure
     ├── README.rst
     ├── manage.py                   Management commands file
     ├── meta.conf                   App meta conf
-    ├── requirements.txt            3rd libraries
+    ├── requirements.txt            3rd party libraries libraries
     ├── requirements_test.txt       Testing 3rd libraries
     ├── temp                        Temp directory for storing logs
     ├── app
        ├── __init__.py              App starting point
        ├── app.py                   Main blueprint with before and after request handler
-       ├── api_info.py              api level constants
+       ├── api_info.py              API level constants
        ├── choices.py               CHOICES constant dictionary
-       ├── crons.py                 Crons diectionary file
-       ├── exceptions.py            custom exceptions
-       ├── stats.py                 Api stats
+       ├── crons.py                 Crons dictionary file
+       ├── exceptions.py            Custom exceptions
+       ├── stats.py                 API stats
        ├── wsgi.py                  wsgi app
        ├── wsgi_aux.py              wsgi auxilary app
        ├── utils                    Utils
        │   ├── __init__.py
-       │   ├── api_caller.py        wrapper over requests which handles emits blinker signal over call
+       │   ├── api_caller.py        Wrapper over requests which handles emits blinker signal over call
        │   ├── common_util.py       common utils
        │   ├── json_util.py         contains custom flask encodes
        │   ├── slack_util.py
@@ -79,3 +81,11 @@ Structure
            └── v1
                └── ├── urls.py url routes
                    ├──demo_api  container one demo api
+
+
+You can also use docker-compose. Hit below command to start server on port 8080.
+
+.. code:: shell
+
+    docker-compose build
+    docker-compose up
