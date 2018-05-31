@@ -83,7 +83,7 @@ Structure
                    ├──demo_api  container one demo api
 
 
-You can use also use docker-compose. Hit below command to start server on port 8080.
+You can also use docker-compose. Hit below command to start server on port 8080.
 
 .. code:: shell
 
