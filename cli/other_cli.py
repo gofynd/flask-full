@@ -3,6 +3,8 @@ import sys
 import urllib
 import logging
 from flask import url_for
+from werkzeug.local import LocalStack
+
 from manage import cli
 from flask import current_app
 
@@ -29,15 +31,10 @@ def build_docs():
 def list_routes():
     """Lists all urls available with app"""
     output = []
+
     for rule in current_app.url_map.iter_rules():
-        options = {}
-        for arg in rule.arguments:
-            options[arg] = "[{0}]".format(arg)
-
         methods = ','.join(rule.methods)
-        url = url_for(rule.endpoint, **options)
-        line = urllib.parse.unquote("{:50s} {:20s} {}".format(rule.endpoint, methods, url))
+        line = urllib.parse.unquote("{:50s} {:20s} {}".format(rule.endpoint, methods, rule.rule))
         output.append(line)
-
     for line in sorted(output):
         print(line)

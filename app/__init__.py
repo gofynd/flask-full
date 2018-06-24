@@ -1,4 +1,7 @@
 import configparser
+
+from flasgger import Swagger
+
 meta = configparser.ConfigParser(interpolation=configparser.ExtendedInterpolation())
 
 meta.read('meta.cfg')
@@ -74,6 +77,8 @@ log_formatter = logging.Formatter((
 
 def create_app(main=True):
     app = Flask(__name__)
+    swagger = Swagger(app)
+
     CORS(app, supports_credentials=True)
     app.config.from_object(current_config)
     app.json_encoder = CustomFlaskJSONEncoder

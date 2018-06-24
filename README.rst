@@ -3,7 +3,7 @@ Flask-Full
 .. image:: https://img.shields.io/circleci/project/github/RedSparr0w/node-csgo-parser/master.svg
     :alt: Travis
 
-Flask-Full is a boilerplate framework on top of flask for developing large api backend applications using flask. It has in built support for creating shell commands, celery, websocket, eventlet, mongoengine orm and rst docs.
+Flask-Full is a boilerplate framework on top of flask for developing large api backend applications using flask. It has in built support for creating shell commands, celery, websocket, eventlet, mongoengine orm, swagger-ui api docs and sphinx docs.
 
 Usage
 -----
@@ -32,6 +32,8 @@ To start server hit
     python3 manage.py run -p 8080
 
 Server will start on port 8080. Hitting http://localhost:8080/ping/ on web browser should return {"message": "pong"}.
+
+API Docs are powered by swagger ui and can be viewed by hitting http://localhost:8080/apidocs/ .
 
 To start celery hit
 
