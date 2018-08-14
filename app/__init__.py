@@ -125,6 +125,7 @@ def create_app(main=True):
     from . import tasks # noqa
     # logger config
     package_name = '.'.join(__name__.split('.')[:-1])
+    root_logger = logging.getLogger(package_name)
     # console handler
     console_handler = logging.StreamHandler(sys.stdout)
     app.logger.addHandler(console_handler)
