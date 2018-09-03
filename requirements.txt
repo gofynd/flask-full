@@ -1,6 +1,6 @@
 Flask==0.12.1
 blinker==1.4
-celery==4.1.0
+celery==4.2.0
 redis==2.10.5
 Flask-Cache==0.13.1
 Flask-Mail==0.9.1
