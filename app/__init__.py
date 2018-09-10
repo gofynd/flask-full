@@ -133,8 +133,8 @@ def create_app(main=True):
     app.logger.setLevel(current_config.LOG_LEVEL)
     # uncomment below three lines to enable file handler
     # rotating_file_handler = RotatingFileHandler(current_config.LOG_FILE_LOCATION, maxBytes=1024 * 1024 * 100, backupCount=20)
-    # rotating_file_handler.setFormatter(formatter)
-    # root_logger.addHandler(rotating_file_handler)
+    # rotating_file_handler.setFormatter(log_formatter)
+    # app.logger.addHandler(rotating_file_handler)
 
     app.logger.info("server environment : {}".format(config_name))
 
