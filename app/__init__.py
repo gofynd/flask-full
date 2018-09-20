@@ -26,7 +26,7 @@ import redis as redis
 from boto3.s3.transfer import S3Transfer
 from celery import Celery
 from flask import Flask
-from flask_cache import Cache
+from flask_caching import Cache
 from flask_cors import CORS
 from flask_mail import Mail
 from flask_socketio import SocketIO
