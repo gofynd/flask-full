@@ -26,4 +26,4 @@ def post_demo_api():
       200:
         description: Returns POST demo api response
     """
-    return jsonify({'name': "demo post api"}), 200
+    return jsonify({'message': "demo post api"}), 200
